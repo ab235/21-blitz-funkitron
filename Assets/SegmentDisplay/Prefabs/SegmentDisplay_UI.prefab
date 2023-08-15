@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &178160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 22444820}
+  - component: {fileID: 11453476}
+  m_Layer: 0
+  m_Name: SegmentDisplay_UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &22444820
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &11453476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9d9b14bc56edb4f86e155c88d345fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayType: 0
+  sevenSegmentStyle: 0
+  fourteenSegmentStyle: 0
+  sixteenSegmentStyle: 0
+  Mod_S14S16_Zero: 0
+  Mod_S14S16_One: 0
+  Mod_S7S14_SixNine: 0
+  Mod_S7_Seven: 0
+  Mod_S14S16_Seven: 0
+  digitCount: 7
+  decimalPointsEnabled: 0
+  apostrophesEnabled: 0
+  colonsEnabled: 0
+  ColonAtIndex: 00000100000000
+  smallerDigitsEnabled: 0
+  SmallerDigitAtIndex: 
+  smallerDigitsSizePercent: 0.5
+  smallerDigitsVerticalPosition: 0
+  segmentSpread: 1
+  digitSpacing: 1
+  colonRelativeSpacing: 0.5
+  offColor: {r: 0, g: 0, b: 1, a: 0.2509804}
+  onColor: {r: 0.1254902, g: 0.1254902, b: 1, a: 1}
+  defaultAlignment: 0
+  initialText: 
+  editorTestContent: 2
+  editorTestText: 0123456789ABCDEF
+  EditorHelp: 0
+  needEditorReCreate: 0
+  uiPosition: 5
+  sevenSegmentBasicDigitImagePrefab: {fileID: 172174, guid: 50196758e02f9774e84a341bce65088e,
+    type: 3}
+  sevenSegmentClassicDigitImagePrefab: {fileID: 106524, guid: 5741cf5c7eb04b940af3a3e82459134f,
+    type: 3}
+  sevenSegmentSharpDigitImagePrefab: {fileID: 172174, guid: 874df1bac8cca234d9065c2a45f3f1b4,
+    type: 3}
+  sevenSegmentRoundDigitImagePrefab: {fileID: 104634, guid: 74d7797927700a141bef46a899c82f9e,
+    type: 3}
+  fourteenSegmentBasicDigitImagePrefab: {fileID: 159162, guid: 16f51f251d6cc0b4d9ea56977c68f9be,
+    type: 3}
+  fourteenSegmentCheapDigitImagePrefab: {fileID: 132920, guid: 130cd5d9864b96548bdb0600a88bba93,
+    type: 3}
+  sixteenSegmentBasicDigitImagePrefab: {fileID: 132922, guid: f8f16cd02c6771c4f9419337ffdcaeb3,
+    type: 3}
+  sixteenSegmentMiniLedsDigitImagePrefab: {fileID: 162304, guid: df2e614c28b7a7b49bbdc9d9af859209,
+    type: 3}

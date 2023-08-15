@@ -363,7 +363,9 @@ public class BoardManager : MonoBehaviour {
 	{
 		GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
 		cam.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-		gboard.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
+		cam.orthographicSize = Screen.height / 2;
+		cam.GetComponent<RectTransform>().position = new Vector3(GetComponent<RectTransform>().position.x, cam.GetComponent<RectTransform>().position.y, cam.GetComponent<RectTransform>().position.z);
+        gboard.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
 		gboard.transform.GetComponent<RectTransform>().localPosition = GetComponent<RectTransform>().position;
         endscreen.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, GetComponent<RectTransform>().sizeDelta.y);
         endscreen.GetComponent<RectTransform>().position = new Vector3(GetComponent<RectTransform>().position.x,
@@ -407,8 +409,8 @@ public class BoardManager : MonoBehaviour {
 		float starty = cam.transform.localPosition.y;
         while (cam.transform.localPosition.y < endheight)
 		{
-            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, (int)(cam.transform.localPosition.y+(endheight-starty)/50), cam.transform.localPosition.z);
-            yield return new WaitForSeconds(0.005f);
+            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, (int)(cam.transform.localPosition.y+(endheight-starty)/100), cam.transform.localPosition.z);
+            yield return new WaitForSeconds(0.0025f);
         }
 	}
 
@@ -426,7 +428,7 @@ public class BoardManager : MonoBehaviour {
 			//stopmenu.showMenu(tb);
 			dimscreen.MakeScreenDark();
 			transform.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
-			endscreen.EndScreenShow();
+			endscreen.EndScreenShow(tb);
 			//Coroutine anim = TweenAnimator.instance.RunMoveAnimation(cam.transform, new Vector3(585, 3801, -473), 6.5f);
 			StartCoroutine(PanCameraUp());
             //Autocomplete.instance.SetButtonState(false);

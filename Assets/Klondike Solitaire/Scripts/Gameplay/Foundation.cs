@@ -123,7 +123,7 @@ public class Foundation : DropZone, IPointerClickHandler
     {
         if (prev_ccount < transform.childCount)
         {
-            if (transform.childCount == 5)
+            if (checkChildren() == 5)
             {
                 MatchStatistics.instance.score += 600;
             }

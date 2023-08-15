@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &178160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401504}
+  - component: {fileID: 11496130}
+  m_Layer: 0
+  m_Name: SegmentDisplay_World
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &401504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11496130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b4903f305817440b1d6c33829a518a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayType: 0
+  sevenSegmentStyle: 0
+  fourteenSegmentStyle: 0
+  sixteenSegmentStyle: 0
+  Mod_S14S16_Zero: 0
+  Mod_S14S16_One: 0
+  Mod_S7S14_SixNine: 0
+  Mod_S7_Seven: 0
+  Mod_S14S16_Seven: 0
+  digitCount: 16
+  decimalPointsEnabled: 0
+  apostrophesEnabled: 0
+  colonsEnabled: 0
+  ColonAtIndex: 00000100000100000000000000000000
+  smallerDigitsEnabled: 0
+  SmallerDigitAtIndex: 
+  smallerDigitsSizePercent: 0.5
+  smallerDigitsVerticalPosition: 0
+  segmentSpread: 1
+  digitSpacing: 1
+  colonRelativeSpacing: 0.5
+  offColor: {r: 0.25, g: 0, b: 0, a: 1}
+  onColor: {r: 1, g: 0, b: 0, a: 1}
+  defaultAlignment: 0
+  initialText: 
+  editorTestContent: 2
+  editorTestText: 0123456789ABCDEF
+  EditorHelp: 0
+  needEditorReCreate: 1
+  sevenSegmentBasicDigitSpritePrefab: {fileID: 172174, guid: d973129f19d68dc4c9ac9fd3dc91836b,
+    type: 3}
+  sevenSegmentClassicDigitSpritePrefab: {fileID: 106524, guid: 46f26cbd66bf94b41973eac648281d11,
+    type: 3}
+  sevenSegmentSharpDigitSpritePrefab: {fileID: 172174, guid: 5f62266ceef1027458abcfd058786898,
+    type: 3}
+  sevenSegmentRoundDigitSpritePrefab: {fileID: 104634, guid: ad0c9a2b2ddd58e45b4f69d9799e29bc,
+    type: 3}
+  fourteenSegmentBasicDigitSpritePrefab: {fileID: 159162, guid: 06bc49af3cb1b26479739f63a1ce20a8,
+    type: 3}
+  fourteenSegmentCheapDigitSpritePrefab: {fileID: 132920, guid: d29796ea2c091ec4a97d8121f653753e,
+    type: 3}
+  sixteenSegmentBasicDigitSpritePrefab: {fileID: 132922, guid: 2d1c1e183d583f34088a27ae25b25b7e,
+    type: 3}
+  sixteenSegmentMiniLedsDigitSpritePrefab: {fileID: 162304, guid: 0a98686cb133e07468f709851caf75fc,
+    type: 3}
+  spriteSortingOrder: 0
