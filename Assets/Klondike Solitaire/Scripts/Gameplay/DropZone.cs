@@ -39,7 +39,7 @@ public class DropZone : MonoBehaviour, IDropHandler
 		canvasGroup = GetComponent<CanvasGroup>();
 	}
 
-    protected void Start()
+    protected virtual void Start()
     {
         waste = FindObjectOfType<Waste>();
         animationQueueController = FindObjectOfType<AnimationQueueController>();

@@ -21,7 +21,7 @@ public class GridTop : MonoBehaviour
     public void UpdatePositions()
     {
         GetComponent<RectTransform>().sizeDelta = new Vector2(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.x, 200);
-        GetComponent<RectTransform>().localPosition = new Vector3(0, (float)(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.y * 0.38), 0);
+        GetComponent<RectTransform>().localPosition = new Vector3(0, (float)(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.y * 0.33), 0);
         pholder = (BoardManager.instance.GetComponent<RectTransform>().sizeDelta.x - 2 * Constants.PADDING_SIDE - 3* GetComponent<GridLayoutGroup>().spacing.x) / Constants.NUMBER_OF_FOUNDATIONS;
         if (pholder > Constants.MAX_FOUND_WIDTH)
         {

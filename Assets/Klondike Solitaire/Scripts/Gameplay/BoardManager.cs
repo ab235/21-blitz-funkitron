@@ -34,6 +34,8 @@ public class BoardManager : MonoBehaviour {
 	private GridTop gtop;
 	private Camera cam;
 	private GameObject gboard;
+	private StockAndWaste sw;
+	private ExtraInfo ei;
 	private bool tableauCardsExposed;
 	private bool probablyLostGameContinued;
 
@@ -59,6 +61,8 @@ public class BoardManager : MonoBehaviour {
 			endscreen = FindObjectOfType<EndScreen>();
 			cam = FindObjectOfType<Camera>();
 			gboard = GameObject.FindWithTag("GameBoard");
+			sw = FindObjectOfType<StockAndWaste>();
+			ei = FindObjectOfType<ExtraInfo>();
             gtop.Start();
 		}
 		catch (System.Exception e)
@@ -378,6 +382,13 @@ public class BoardManager : MonoBehaviour {
 		UpdateScreen();
         tline.UpdatePositions();
 		gtop.UpdatePositions();
+		sw.UpdatePosition();
+		ei.UpdatePosition();
+        if (waste.transform.childCount > 0 && waste.transform.GetChild(0).GetComponent<Card>() != null && Foundation.isBJ(waste.transform.GetChild(0).GetComponent<Card>()))
+        {
+            tline.showWild();
+			ei.ShowWild();
+        }
         foreach (Foundation f in foundations)
 		{
 			f.pointCheck();

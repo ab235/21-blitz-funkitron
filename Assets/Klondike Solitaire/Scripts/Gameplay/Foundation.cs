@@ -13,8 +13,13 @@ public class Foundation : DropZone, IPointerClickHandler
     public int indipoints { get; private set; }
     private int prev_ccount;
     public int ace_count { get; private set; }
+    public bool isStreak { get; private set; }
 
     private CanvasGroup hider;
+
+    private TextLine tline;
+
+    private ExtraInfo ei;
 
     // Event handler for "OnDrop" method when a card is dropped on the foundation stack
 
@@ -23,6 +28,7 @@ public class Foundation : DropZone, IPointerClickHandler
         indipoints = 0;
         ace_count = 0;
         prev_ccount = 0;
+        isStreak = false;
         hider = transform.parent.parent.Find("Hider").GetComponent<CanvasGroup>();
         hideHider();
         if (!hider)
@@ -31,6 +37,25 @@ public class Foundation : DropZone, IPointerClickHandler
         }
         Debug.Log(GetComponentInParent<GridLayoutGroup>().cellSize);
         base.Awake();
+    }
+
+    protected override void Start()
+    {
+        tline = FindObjectOfType<TextLine>();
+        ei = FindObjectOfType<ExtraInfo>();
+        base.Start();
+    }
+
+    private int FoundNum()
+    {
+        for (int i = 0; i < transform.parent.childCount; i++)
+        {
+            if (transform.parent.GetChild(i) == transform)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
     public override void OnDrop(PointerEventData eventData)
     {
@@ -44,6 +69,11 @@ public class Foundation : DropZone, IPointerClickHandler
         OnDrop(droppedCard);
     }
     // Overridden "OnDrop" method when a card is dropped
+
+    public static bool isBJ(Card c)
+    {
+        return ((c.cardColor == Enums.CardColor.spades || c.cardColor == Enums.CardColor.clubs) && c.cardValue == Enums.CardValue.Jack);
+    }
     public override void OnDrop(Card droppedCard)
     {
         if (droppedCard != null && droppedCard.GetComponent<Card>() != null && droppedCard.canDrag)
@@ -64,7 +94,7 @@ public class Foundation : DropZone, IPointerClickHandler
                 MatchStatistics.instance.moves--;
 
                 // Call the parent class' "OnDrop" method
-                if ((droppedCard.cardColor == Enums.CardColor.spades || droppedCard.cardColor == Enums.CardColor.clubs) && droppedCard.cardValue == Enums.CardValue.Jack)
+                if (isBJ(droppedCard))
                 {
                     indipoints = 21;
                 }
@@ -121,6 +151,10 @@ public class Foundation : DropZone, IPointerClickHandler
     }
     public void pointCheck()
     {
+        if (isStreak)
+        {
+            isStreak = false;
+        }
         if (prev_ccount < transform.childCount)
         {
             if (checkChildren() == 5)
@@ -136,6 +170,11 @@ public class Foundation : DropZone, IPointerClickHandler
                     MatchStatistics.instance.AddScore(Constants.STREAK_POINTS*MatchStatistics.instance.streak);
                     MatchStatistics.instance.max_streak_points += Constants.STREAK_POINTS * MatchStatistics.instance.streak;
                     MatchStatistics.instance.streak++;
+                    if (MatchStatistics.instance.streak > 1)
+                    {
+                        int fnum = FoundNum();
+                        tline.showStreak(fnum);
+                    }
                     if (checkChildren() >= 5)
                     {
                         MatchStatistics.instance.num_combos++;
@@ -164,6 +203,8 @@ public class Foundation : DropZone, IPointerClickHandler
         {
             if (!BoardManager.instance.isDragging)
             {
+                tline.hideText();
+                ei.HideText();
                 showHider();
                 if (waste.transform.childCount > 0 && waste.transform.GetChild(0).GetComponent<Card>() != null)
                 {

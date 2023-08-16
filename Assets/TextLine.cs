@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -28,6 +29,28 @@ public class TextLine : MonoBehaviour
         GetComponent<GridLayoutGroup>().padding.left = (int)padding+Constants.PADDING_SIDE;
     }
 
+    public void showWild()
+    {
+        for (int i = 0; i < Constants.NUMBER_OF_FOUNDATIONS; i++)
+        {
+            transform.GetChild(i).GetComponent<Text>().text = "Wild";
+        }
+    }
+
+    public void showStreak(int found_num)
+    {
+        transform.GetChild(found_num).GetComponent<Text>().text = "Good\nStreak!";
+        Invoke("hideText", (float)2);
+    }
+
+    public void hideText()
+    {
+        for (int i = 0; i < Constants.NUMBER_OF_FOUNDATIONS; i++)
+        {
+            transform.GetChild(i).GetComponent<Text>().text = "";
+        }
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -35,13 +58,20 @@ public class TextLine : MonoBehaviour
         {
             int points = foundations[i].GetComponent<Foundation>().indipoints;
             int ace_count = foundations[i].GetComponent<Foundation>().ace_count;
-            if (points <= 11 && ace_count > 0)
+            if (foundations[i].isStreak)
             {
-                transform.GetChild(i).GetComponent<Text>().text = (points.ToString() + " / " + (points + 10).ToString());
+                transform.GetChild(i).GetComponent<Text>().text = "Good\nStreak!";
             }
             else
             {
-                transform.GetChild(i).GetComponent<Text>().text = points.ToString();
+                if (points <= 11 && ace_count > 0)
+                {
+                    transform.GetChild(i+Constants.NUMBER_OF_FOUNDATIONS).GetComponent<Text>().text = (points.ToString() + " / " + (points + 10).ToString());
+                }
+                else
+                {
+                    transform.GetChild(i+Constants.NUMBER_OF_FOUNDATIONS).GetComponent<Text>().text = points.ToString();
+                }
             }
         }
     }
