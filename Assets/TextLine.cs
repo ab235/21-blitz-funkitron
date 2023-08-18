@@ -66,7 +66,7 @@ public class TextLine : MonoBehaviour
             {
                 if (points <= 11 && ace_count > 0)
                 {
-                    transform.GetChild(i+Constants.NUMBER_OF_FOUNDATIONS).GetComponent<Text>().text = (points.ToString() + " / " + (points + 10).ToString());
+                    transform.GetChild(i+Constants.NUMBER_OF_FOUNDATIONS).GetComponent<Text>().text = (points.ToString() + "/" + (points + 10).ToString());
                 }
                 else
                 {

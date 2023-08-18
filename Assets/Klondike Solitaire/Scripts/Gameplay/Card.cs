@@ -77,14 +77,15 @@ public class Card : Draggable, IPointerClickHandler {
 	}
 	public void UpdateSize()
 	{
-		if (isDealt)
+        float curr_w = GetComponent<RectTransform>().sizeDelta.x;
+        transform.localScale = new Vector3((GridTop.cardWidth / curr_w), GridTop.cardWidth * Constants.CARD_HEIGHT_DIFF / curr_w, 1);
+        if (isDealt)
 		{
-			float curr_w = GetComponent<RectTransform>().sizeDelta.x;
-			transform.localScale = new Vector3((GridTop.cardWidth / curr_w), GridTop.cardWidth * Constants.CARD_HEIGHT_DIFF / curr_w, 1);
+			//transform.localScale = new Vector3((GridTop.cardWidth / curr_w), GridTop.cardWidth * Constants.CARD_HEIGHT_DIFF / curr_w, 1);
 		}
 		else
 		{
-            transform.localScale = new Vector3((float)1.5, (float)(1.5*(Constants.CARD_HEIGHT_DIFF-0.5)), 1);
+            //transform.localScale = new Vector3((float)1.5, (float)(1.5*(Constants.CARD_HEIGHT_DIFF-0.5)/ ), 1);
         }
     }
 	private void Start() {

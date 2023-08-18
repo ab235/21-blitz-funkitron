@@ -18,7 +18,7 @@ public class Constants {
 	public const float AUTOCOMPLETE_TIME_SCALE = 1.5f;
 	public const int STOCK_START_INDEX = 0;
 	public const float CARD_SCALE = (float)1.3;
-	public const float CARD_HEIGHT_DIFF = (float)1.45;
+	public const float CARD_HEIGHT_DIFF = (float)1.2;
 	public const int DROPZONE_HEIGHT = 1;
 	public const int PADDING_SIDE = 20;
 	public const int MAX_FOUND_WIDTH = 220;

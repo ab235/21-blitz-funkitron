@@ -18,39 +18,15 @@ public class EndScreen : MonoBehaviour
     {
         GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
         int len = MatchStatistics.instance.score.ToString().Length;
-        string zeronum = "";
-        for (int i = 0; i < 7-len; i++)
-        {
-            zeronum += "0";
-        }
-        mainScore.SetText(zeronum+MatchStatistics.instance.score.ToString());
+        mainScore.DigitCount = len;
+        mainScore.SetText(MatchStatistics.instance.score.ToString());
         len = (MatchStatistics.instance.score - MatchStatistics.instance.num_combos * 1000 - MatchStatistics.instance.max_streak_points - tb).ToString().Length;
-        zeronum = "";
-        for (int i = 0; i < 7 - len; i++)
-        {
-            zeronum += "0";
-        }
-        baseScore.SetText(zeronum+(MatchStatistics.instance.score - MatchStatistics.instance.num_combos * 1000 - MatchStatistics.instance.max_streak_points - tb).ToString());
+        baseScore.SetText((MatchStatistics.instance.score - MatchStatistics.instance.num_combos * 1000 - MatchStatistics.instance.max_streak_points - tb).ToString());
         len = MatchStatistics.instance.max_streak_points.ToString().Length;
-        zeronum = "";
-        for (int i = 0; i < 7 - len; i++)
-        {
-            zeronum += "0";
-        }
-        streakScore.SetText(zeronum + MatchStatistics.instance.max_streak_points.ToString());
+        streakScore.SetText(MatchStatistics.instance.max_streak_points.ToString());
         len = (MatchStatistics.instance.num_combos * 1000).ToString().Length;
-        zeronum = "";
-        for (int i = 0; i < 7 - len; i++)
-        {
-            zeronum += "0";
-        }
-        comboScore.SetText(zeronum + (MatchStatistics.instance.num_combos * 1000).ToString());
+        comboScore.SetText((MatchStatistics.instance.num_combos * 1000).ToString());
         len = tb.ToString().Length;
-        zeronum = "";
-        for (int i = 0; i < 7 - len; i++)
-        {
-            zeronum += "0";
-        }
-        timeScore.SetText(zeronum + tb.ToString());
+        timeScore.SetText(tb.ToString());
     }
 }
