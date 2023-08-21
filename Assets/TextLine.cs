@@ -13,10 +13,15 @@ public class TextLine : MonoBehaviour
 
     private Foundation[] foundations;
     private float padding;
+    private float timer;
     void Start()
     {
         foundations = FindObjectsOfType<Foundation>();
         foundations = foundations.OrderBy((x) => x.name).ToArray();
+        foreach (Transform child in transform)
+        {
+            transform.Find("21popup").gameObject.SetActive(false);
+        }
     }
 
     public void UpdatePositions()
@@ -49,6 +54,20 @@ public class TextLine : MonoBehaviour
         {
             transform.GetChild(i).GetComponent<Text>().text = "";
         }
+    }
+
+    public void Flash21(int found_num)
+    {
+        transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("PointSign").gameObject.SetActive(false);
+        transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("21popup").gameObject.SetActive(true);
+        transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).GetComponent<Text>().text = "";
+        StartCoroutine(Reactivate_PS(found_num));
+    }
+    public IEnumerator Reactivate_PS(int found_num)
+    {
+        yield return new WaitForSeconds(1);
+        transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("PointSign").gameObject.SetActive(true);
+        transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("21popup").gameObject.SetActive(false);
     }
 
     // Update is called once per frame

@@ -170,6 +170,7 @@ public class Foundation : DropZone, IPointerClickHandler
                     MatchStatistics.instance.AddScore(Constants.STREAK_POINTS*MatchStatistics.instance.streak);
                     MatchStatistics.instance.max_streak_points += Constants.STREAK_POINTS * MatchStatistics.instance.streak;
                     MatchStatistics.instance.streak++;
+                    tline.Flash21(FoundNum());
                     if (MatchStatistics.instance.streak > 1)
                     {
                         int fnum = FoundNum();
