@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEngine.UIElements;
 
 // Enumeration for the different types of scoring
 public enum ScoreType { none, normal, vegas};
@@ -95,7 +96,10 @@ public class MatchStatistics : MonoBehaviour {
 		get { return _streak; }
 		set
 		{
-			_streak = value;
+			if (value < 4)
+			{
+                _streak = value;
+            }
 			RefreshStreakText();
 		}
 	}
@@ -172,7 +176,7 @@ public class MatchStatistics : MonoBehaviour {
 
     private void RefreshStreakText()
     {
-        streakText.text = _streak.ToString() + "/4";
+        streakText.text = _streak.ToString() + "/" + Constants.MAX_STREAK.ToString();
     }
 
     // This script is used for game state management and display of game time, score, and moves
@@ -234,6 +238,7 @@ public class MatchStatistics : MonoBehaviour {
 			float t = 180 - (totalTime - startTime);
 			if (t <= 0)
 			{
+				BoardManager.instance.isGameWon = true;
                 BoardManager.instance.FinishGame();
                 BoardManager.instance.LockBoard();
 			}
@@ -242,7 +247,7 @@ public class MatchStatistics : MonoBehaviour {
 			string stringTime = t > 99 * 60 ? "∞" : TimeToString.GetTimeStringMSFormat(180 - (totalTime - startTime));
 
 			// Updates the time text with the formatted time string
-			timeText.text = "time: " + stringTime;
+			timeText.text = stringTime;
 		}
 	}
 
@@ -255,10 +260,10 @@ public class MatchStatistics : MonoBehaviour {
 				scoreText.text = "";
 				break;
 			case ScoreType.normal:
-				scoreText.text = "score: " + score.ToString();
+				scoreText.text = score.ToString();
 				break;
 			case ScoreType.vegas:
-				scoreText.text = "score: " + vegasScore.ToString() + "$";
+				scoreText.text = vegasScore.ToString() + "$";
 				break;
 			default:
 				break;

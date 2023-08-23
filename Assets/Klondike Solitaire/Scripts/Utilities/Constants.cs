@@ -22,6 +22,7 @@ public class Constants {
 	public const int DROPZONE_HEIGHT = 1;
 	public const int PADDING_SIDE = 20;
 	public const int MAX_FOUND_WIDTH = 220;
+	public const int MAX_STREAK = 4;
 
 	// Constants for deck of cards
 	public const int CARDS_IN_DECK = 52;

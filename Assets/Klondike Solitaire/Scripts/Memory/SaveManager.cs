@@ -36,7 +36,6 @@ public class SaveManager : MonoBehaviour {
 	/// The SaveState object contains information about the game's moves, score, vegas score, and card information.
 	/// </summary>
 	public void Save() {
-		print("hello");
 		SaveState newSave = new SaveState();
 		newSave.moves = MatchStatistics.instance.moves;
 		newSave.score = MatchStatistics.instance.score;
@@ -84,7 +83,6 @@ public class SaveManager : MonoBehaviour {
 				Card myCard = gameCardsSet[i];
 				CardInfo myCardInfo = lastSave.cardsInfo[myCard];
 				myCard.gameObject.SetActive(true);
-				print(myCard);
 				CheckIfCardNeedRotateAnim(myCard, myCardInfo);
 
 				//trasfrom local position to world pos
@@ -237,8 +235,6 @@ public class SaveManager : MonoBehaviour {
 	}
 
 	private bool CheckIfPreviousCardParentIsStock(CardInfo myCardInfo) {
-		print(myCardInfo);
-		print(myCardInfo.GetParent());
 		Stock stock = myCardInfo.GetParent().GetComponent<Stock>();
 		return (stock != null) ? true : false;
 	}

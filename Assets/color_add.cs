@@ -12,7 +12,6 @@ public class color_add : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        print("Hello from md");
         if (GetComponent<Renderer>().material.color == Color.red)
         {
             GetComponent<Renderer>().material.color = Color.black;

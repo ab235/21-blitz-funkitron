@@ -179,7 +179,6 @@ public class Foundation : DropZone, IPointerClickHandler
                     if (checkChildren() >= 5)
                     {
                         MatchStatistics.instance.num_combos++;
-                        print(MatchStatistics.instance.num_combos);
                     }
                 }
                 else
@@ -280,7 +279,6 @@ public class Foundation : DropZone, IPointerClickHandler
         points += (int)droppedCard.cardValue;
         if (points > 21)
         {
-            print(points);
             return 0;
         }
         if (points == 21)

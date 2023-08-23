@@ -8,7 +8,7 @@ public class BoardManager : MonoBehaviour {
 	public static BoardManager instance { get; private set; }
 
 	//public static GameObject[] cardPrefabs;
-	public bool isGameWon { get; private set; }
+	public bool isGameWon;
 
 	public bool isDragging;
 
@@ -36,6 +36,7 @@ public class BoardManager : MonoBehaviour {
 	private GameObject gboard;
 	private StockAndWaste sw;
 	private ExtraInfo ei;
+	private GameObject topui;
 	private bool tableauCardsExposed;
 	private bool probablyLostGameContinued;
 
@@ -63,6 +64,7 @@ public class BoardManager : MonoBehaviour {
 			gboard = GameObject.FindWithTag("GameBoard");
 			sw = FindObjectOfType<StockAndWaste>();
 			ei = FindObjectOfType<ExtraInfo>();
+			topui = GameObject.FindGameObjectWithTag("TopUI");
             gtop.Start();
 		}
 		catch (System.Exception e)
@@ -366,24 +368,31 @@ public class BoardManager : MonoBehaviour {
 	private void UpdateScreen()
 	{
 		GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-		cam.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
+        GetComponent<RectTransform>().position = new Vector3(0, 0, 0);
+        cam.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
 		cam.orthographicSize = Screen.height / 2;
-		cam.GetComponent<RectTransform>().position = new Vector3(GetComponent<RectTransform>().position.x, cam.GetComponent<RectTransform>().position.y, cam.GetComponent<RectTransform>().position.z);
-        gboard.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-		gboard.transform.GetComponent<RectTransform>().localPosition = GetComponent<RectTransform>().position;
-        endscreen.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, GetComponent<RectTransform>().sizeDelta.y);
+		cam.GetComponent<RectTransform>().position = new Vector3(GetComponent<RectTransform>().position.x,
+			GetComponent<RectTransform>().position.y, cam.GetComponent<RectTransform>().position.z);
+        gboard.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, (float)(Screen.height*1.52));
+		gboard.transform.GetComponent<RectTransform>().localPosition = 
+			new Vector3(GetComponent<RectTransform>().position.x, (float)(GetComponent<RectTransform>().position.y + Screen.height*0.26),
+			GetComponent<RectTransform>().position.z);
+        /*endscreen.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, GetComponent<RectTransform>().sizeDelta.y);
         endscreen.GetComponent<RectTransform>().position = new Vector3(GetComponent<RectTransform>().position.x,
             GetComponent<RectTransform>().position.y + GetComponent<RectTransform>().sizeDelta.y * GetComponent<RectTransform>().localScale.y,
-            GetComponent<RectTransform>().position.z);
+            GetComponent<RectTransform>().position.z);*/
     }
 
     private void Update()
     {
-		UpdateScreen();
-        tline.UpdatePositions();
-		gtop.UpdatePositions();
-		sw.UpdatePosition();
-		ei.UpdatePosition();
+        if (!CheckIfGameComplete() && !isGameWon)
+        {
+            UpdateScreen();
+            tline.UpdatePositions();
+            gtop.UpdatePositions();
+            sw.UpdatePosition();
+            ei.UpdatePosition();
+        }
         if (waste.transform.childCount > 0 && waste.transform.GetChild(0).GetComponent<Card>() != null && Foundation.isBJ(waste.transform.GetChild(0).GetComponent<Card>()))
         {
             tline.showWild();
@@ -399,6 +408,7 @@ public class BoardManager : MonoBehaviour {
         }
         if (CheckIfGameComplete())
 		{
+			FinishGame();
 			LockBoard();
 		}
     }
@@ -408,22 +418,25 @@ public class BoardManager : MonoBehaviour {
 			isGameWon = false;
 			return false;
 		}
-		FinishGame();
-
 		return true;
 	}
 
 	private IEnumerator PanCameraUp()
 	{
-		float endheight = endscreen.GetComponent<RectTransform>().position.y;
+		float endheight = gboard.GetComponent<RectTransform>().sizeDelta.y - GetComponent<RectTransform>().sizeDelta.y + GetComponent<RectTransform>().position.y;
+		print(endheight);
         yield return new WaitForSeconds(0.05f);
 		float starty = cam.transform.localPosition.y;
         while (cam.transform.localPosition.y < endheight)
 		{
-            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, (int)(cam.transform.localPosition.y+(endheight-starty)/100), cam.transform.localPosition.z);
+			print(cam.transform.localPosition.y);
+			print("endheight - starty" + (endheight - starty).ToString());
+            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, (float)(cam.transform.localPosition.y+(endheight-starty)/100), cam.transform.localPosition.z);
+			print(new Vector3(cam.transform.localPosition.x, (float)(cam.transform.localPosition.y + (endheight - starty) / 100), cam.transform.localPosition.z));
             yield return new WaitForSeconds(0.0025f);
         }
-	}
+        print(cam.transform.localPosition.y);
+    }
 
 	public void FinishGame() {
 		if (!isGameWon)
@@ -437,9 +450,9 @@ public class BoardManager : MonoBehaviour {
 			}
 			MatchStatistics.instance.AddScore(tb);
 			//stopmenu.showMenu(tb);
-			dimscreen.MakeScreenDark();
 			transform.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
 			endscreen.EndScreenShow(tb);
+			topui.SetActive(false);
 			//Coroutine anim = TweenAnimator.instance.RunMoveAnimation(cam.transform, new Vector3(585, 3801, -473), 6.5f);
 			StartCoroutine(PanCameraUp());
             //Autocomplete.instance.SetButtonState(false);

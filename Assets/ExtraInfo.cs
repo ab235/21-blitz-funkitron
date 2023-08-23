@@ -10,8 +10,8 @@ public class ExtraInfo : MonoBehaviour
     public void UpdatePosition()
     {
         GetComponent<RectTransform>().sizeDelta = new Vector2(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.x, (float)(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.y * 0.10));
-        GetComponent<RectTransform>().localPosition = new Vector3(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.x/2, (float)(-BoardManager.instance.GetComponent<RectTransform>().sizeDelta.y * 0.15), 0);
-        print(GetComponent<RectTransform>().localPosition);
+        GetComponent<RectTransform>().localPosition = new Vector3(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.x/2, (float)(-BoardManager.instance.GetComponent<RectTransform>().sizeDelta.y * 0.24), 0);
+
     }
 
     public void ShowWild()
