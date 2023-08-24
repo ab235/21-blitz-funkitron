@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using JetBrains.Annotations;
 
 public class SaveManager : MonoBehaviour {
 	public static SaveManager instance { get; private set; }
@@ -57,6 +58,7 @@ public class SaveManager : MonoBehaviour {
 	/// The TryUndo method adds an undo action to the animationQueueController's animation queue. 
 	/// </summary>
 	public void TryUndo() {
+		print("hi");
 		animationQueueController.AddActionToQueue(Undo);
 	}
 
@@ -78,6 +80,10 @@ public class SaveManager : MonoBehaviour {
 			MatchStatistics.instance.moves = lastSave.moves;
 			MatchStatistics.instance.vegasScore = lastSave.vegasScore;
 			stock.stockLimit = lastSave.stockLimit;
+			for (int i = 0; i < saveList.Count; i++)
+			{
+				print(saveList[i]);
+			}
 			for (int i = 0; i < lastSave.cardsInfo.Count; i++)
 			{
 				Card myCard = gameCardsSet[i];
@@ -133,6 +139,10 @@ public class SaveManager : MonoBehaviour {
 			Card card = filteredCardList[i].GetCard();
 			card.RegisterOnAnimationFinishCB(FinishUndoAnimation);
 			float animTime = Constants.MOVE_ANIM_TIME;
+			if (filteredCardList[i] == null)
+			{
+				print("xd");
+			}
 			if (CheckIfPreviousCardParentIsStock(filteredCardList[i]) || CheckIfCurrentParentIsStock(filteredCardList[i]))
 			{
 				refreshWaste = true;
@@ -235,8 +245,14 @@ public class SaveManager : MonoBehaviour {
 	}
 
 	private bool CheckIfPreviousCardParentIsStock(CardInfo myCardInfo) {
-		Stock stock = myCardInfo.GetParent().GetComponent<Stock>();
-		return (stock != null) ? true : false;
+
+		Transform t = myCardInfo.GetParent();
+		if (t != null)
+		{
+			Stock stock = t.GetComponent<Stock>();
+			return (stock != null);
+		}
+		return true;
 	}
 
 	private bool CheckIfCurrentParentIsStock(CardInfo myCardInfo) {

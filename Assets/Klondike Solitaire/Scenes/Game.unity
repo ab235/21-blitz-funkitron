@@ -1270,6 +1270,7 @@ MonoBehaviour:
   streakText: {fileID: 1004601763}
   num_combos: 0
   max_streak_points: 0
+  StopUpdating: 0
 --- !u!114 &211983111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6199,6 +6200,7 @@ GameObject:
   - component: {fileID: 1279381543}
   - component: {fileID: 1279381544}
   - component: {fileID: 1279381545}
+  - component: {fileID: 1279381546}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -6237,6 +6239,11 @@ MonoBehaviour:
   dropCardSound: {fileID: 8300000, guid: dd5bacf9945e369439360037ee4edf4f, type: 3}
   pickCardSound: {fileID: 8300000, guid: e3bc8d20967ebcd48bfb6d2bb2473a3d, type: 3}
   btnClickSound: {fileID: 8300000, guid: 06919586eccff2e449b3bafb5f63500c, type: 3}
+  endgameCheer: {fileID: 8300000, guid: e1672d4e7711dda42ad224f649c25a4b, type: 3}
+  HutHike: {fileID: 8300000, guid: 84823d24525cf55489c79adc5c7678e7, type: 3}
+  FootballCatch: {fileID: 8300000, guid: 0efd384854a694b449b6c32df767a2af, type: 3}
+  TouchDown: {fileID: 8300000, guid: 38358e711332df343b6ca064835ab98f, type: 3}
+  CrowdNoise: {fileID: 8300000, guid: 5f4a05cdfa12cc842b6cc4dc21b3a898, type: 3}
 --- !u!82 &1279381545
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6247,11 +6254,107 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5f4a05cdfa12cc842b6cc4dc21b3a898, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &1279381546
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279381542}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5f4a05cdfa12cc842b6cc4dc21b3a898, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.326
+  m_Pitch: 1
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -10995,8 +11098,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27346095, y: 0}
   m_AnchorMax: {x: 0.72982603, y: 0.16138233}
-  m_AnchoredPosition: {x: -7.075467, y: 0}
-  m_SizeDelta: {x: 6.060569, y: -0.6094227}
+  m_AnchoredPosition: {x: -7.0755005, y: 0}
+  m_SizeDelta: {x: 7.0755, y: -220.6181}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2042597598
 MonoBehaviour:
@@ -11074,7 +11177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bb05dcd42f1386f4594e934beac1b9c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d3ead9fd05e4d6b4881f5007d4d17429, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

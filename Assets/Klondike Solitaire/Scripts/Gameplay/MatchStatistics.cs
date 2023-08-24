@@ -40,6 +40,8 @@ public class MatchStatistics : MonoBehaviour {
 
 	public int max_streak_points;
 
+	public bool StopUpdating;
+
 	// Private variable to store the starting time of the game
 	private float startTime;
 
@@ -217,6 +219,8 @@ public class MatchStatistics : MonoBehaviour {
 
 		RefreshFailuresText();
 
+		StopUpdating = false;
+
         // Calls the StartTime method
         StartTime();
 	}
@@ -224,7 +228,10 @@ public class MatchStatistics : MonoBehaviour {
 	void Update()
 	{
 		// Calls the ShowTime method
-		ShowTime();
+		if (!StopUpdating)
+		{
+            ShowTime();
+        }
 	}
 
 	private void ShowTime() {
@@ -238,7 +245,8 @@ public class MatchStatistics : MonoBehaviour {
 			float t = 180 - (totalTime - startTime);
 			if (t <= 0)
 			{
-				BoardManager.instance.isGameWon = true;
+                t = 0;
+                StopUpdating = true;
                 BoardManager.instance.FinishGame();
                 BoardManager.instance.LockBoard();
 			}

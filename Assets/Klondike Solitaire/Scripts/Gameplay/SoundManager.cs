@@ -6,7 +6,7 @@ using System;
 public class SoundManager : MonoBehaviour {
 
     // Reference to the AudioSource component
-    private AudioSource audioSource;
+    private AudioSource [] audioSource;
 
     // Static reference to the SoundManager instance
     public static SoundManager instance;
@@ -16,6 +16,11 @@ public class SoundManager : MonoBehaviour {
     public AudioClip dropCardSound;
     public AudioClip pickCardSound;
     public AudioClip btnClickSound;
+    public AudioClip endgameCheer;
+    public AudioClip HutHike;
+    public AudioClip FootballCatch;
+    public AudioClip TouchDown;
+    public AudioClip CrowdNoise;
 
     // Boolean to lock audio playback
     private bool locked = false;
@@ -26,10 +31,31 @@ public class SoundManager : MonoBehaviour {
         instance = this;
 
         // Get reference to the AudioSource component
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponents<AudioSource>();
     }
 
     // Play the reverse card sound effect
+    public void PlayCrowdNoise()
+    {
+        audioSource[1].Play();
+    }
+    public void PlayEGC()
+    {
+        PlaySound(endgameCheer, true);
+        Invoke("Stop", 5);
+    }
+    public void PlayHH()
+    {
+        PlaySound(HutHike, true);
+    }
+    public void PlayFBC()
+    {
+        PlaySound(FootballCatch, true);
+    }
+    public void PlayTD()
+    {
+        PlaySound(TouchDown, true);
+    }
     public void PlayReverseCardSound()
     {
         PlaySound(reverseCardSound);
@@ -63,7 +89,7 @@ public class SoundManager : MonoBehaviour {
             locked = true;
 
             // Play the sound effect
-            audioSource.PlayOneShot(audioClip);
+            audioSource[0].PlayOneShot(audioClip);
 
             // Invoke the Unlock method after Constants.SOUND_LOCK_TIME seconds
             Invoke("Unlock", Constants.SOUND_LOCK_TIME);
@@ -74,5 +100,11 @@ public class SoundManager : MonoBehaviour {
     void Unlock()
     {
         locked = false;
+    }
+
+    void Stop()
+    {
+        audioSource[0].Stop();
+        audioSource[1].Stop();
     }
 }

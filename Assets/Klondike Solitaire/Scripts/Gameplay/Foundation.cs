@@ -166,6 +166,8 @@ public class Foundation : DropZone, IPointerClickHandler
             {
                 if (indipoints == 21 || (indipoints == 11 && ace_count > 0))
                 {
+                    SoundManager.instance.PlayFBC();
+                    SoundManager.instance.PlayTD();
                     MatchStatistics.instance.AddScore(Constants.STACK_CLEAR_POINTS);
                     MatchStatistics.instance.AddScore(Constants.STREAK_POINTS*MatchStatistics.instance.streak);
                     MatchStatistics.instance.max_streak_points += Constants.STREAK_POINTS * MatchStatistics.instance.streak;

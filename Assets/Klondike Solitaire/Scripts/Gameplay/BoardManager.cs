@@ -91,6 +91,8 @@ public class BoardManager : MonoBehaviour {
 		BackCardsToInitialState();
 		SaveManager.instance.SetGameCardsSet(cardsPool);
 		tline.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 200);
+		SoundManager.instance.PlayHH();
+		SoundManager.instance.PlayCrowdNoise();
 		/*if (dealCardsCoroutine != null)
 			StopCoroutine(dealCardsCoroutine);
 		dealCardsCoroutine = DealCards();
@@ -385,7 +387,7 @@ public class BoardManager : MonoBehaviour {
 
     private void Update()
     {
-        if (!CheckIfGameComplete() && !isGameWon)
+        if (!CheckIfGameComplete() && !isGameWon && !MatchStatistics.instance.StopUpdating)
         {
             UpdateScreen();
             tline.UpdatePositions();
@@ -441,6 +443,7 @@ public class BoardManager : MonoBehaviour {
 	public void FinishGame() {
 		if (!isGameWon)
 		{
+			SoundManager.instance.PlayEGC();
 			int tb = 0;
 			isGameWon = true;
 			MatchStatistics.instance.StopTime();

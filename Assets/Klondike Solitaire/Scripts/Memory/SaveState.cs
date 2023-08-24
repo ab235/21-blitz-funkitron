@@ -51,6 +51,10 @@ public class CardInfo {
 	}
 
 	public Vector3 GetPos() {
+		if (parentTransform == null)
+		{
+			return pos;
+		}
 		if (parentTransform.GetComponent<Tableau>() != null)
 		{
 			Vector3 newPos = card.GetLocalPosition(childOrder, card.size.y);
