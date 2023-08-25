@@ -12,6 +12,7 @@ public class TextLine : MonoBehaviour
     // Start is called before the first frame update
 
     private Foundation[] foundations;
+    private Transform[] pointsigns;
     private float padding;
     private float timer;
     private int disable_text;
@@ -19,6 +20,11 @@ public class TextLine : MonoBehaviour
     {
         foundations = FindObjectsOfType<Foundation>();
         foundations = foundations.OrderBy((x) => x.name).ToArray();
+        pointsigns = new Transform[Constants.NUMBER_OF_FOUNDATIONS];
+        for (int i = Constants.NUMBER_OF_FOUNDATIONS; i < Constants.NUMBER_OF_FOUNDATIONS*2; i++)
+        {
+            pointsigns[i-Constants.NUMBER_OF_FOUNDATIONS] = transform.GetChild(i).Find("PointSign");
+        }
         disable_text = -1;
     }
 
@@ -32,6 +38,11 @@ public class TextLine : MonoBehaviour
             big_size = 225;
         }
         GetComponent<GridLayoutGroup>().cellSize = new Vector2(big_size, (float)(BoardManager.instance.GetComponent<RectTransform>().sizeDelta.y*0.08));//new Vector2(GridTop.cardWidth-10, 150);
+        for (int i = 0; i < Constants.NUMBER_OF_FOUNDATIONS; i++)
+        {
+            pointsigns[i].GetComponent<RectTransform>().localScale = new Vector3((float)(big_size*0.444), (float)(BoardManager.instance.
+                GetComponent<RectTransform>().sizeDelta.y * 0.08*0.444), 1);
+        }
         GetComponent<GridLayoutGroup>().spacing = new Vector2(30, 0);
         padding = (BoardManager.instance.GetComponent<RectTransform>().sizeDelta.x - (90 + (4*big_size+180)))/2;
         if (padding < 0)
@@ -66,7 +77,7 @@ public class TextLine : MonoBehaviour
 
     public void Flash21(int found_num)
     {
-        transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("PointSign").gameObject.SetActive(false);
+        pointsigns[found_num].gameObject.SetActive(false);
         transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("21popup").gameObject.SetActive(true);
         disable_text = found_num;
         StartCoroutine(Reactivate_PS(found_num));
@@ -74,7 +85,7 @@ public class TextLine : MonoBehaviour
     public IEnumerator Reactivate_PS(int found_num)
     {
         yield return new WaitForSeconds(1);
-        transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("PointSign").gameObject.SetActive(true);
+        pointsigns[found_num].gameObject.SetActive(true);
         transform.GetChild(found_num + Constants.NUMBER_OF_FOUNDATIONS).Find("21popup").gameObject.SetActive(false);
         disable_text = -1;
     }

@@ -195,6 +195,10 @@ public class Foundation : DropZone, IPointerClickHandler
                 indipoints = 0;
                 ace_count = 0;
             }
+            else
+            {
+                MatchStatistics.instance.streak = 0;
+            }
             BoardManager.instance.UnlockBoard();
         }
         prev_ccount = transform.childCount;
